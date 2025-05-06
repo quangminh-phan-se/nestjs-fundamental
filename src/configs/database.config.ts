@@ -25,7 +25,7 @@ export class ConfigDatabase {
       password: this.getValue('DATABASE_PASSWORD'),
       database: this.getValue('DATABASE_NAME'),
       entities: [Recipe, Ingredient],
-      synchronize: true,
+      synchronize: false,
       logging: true,
     };
   }
