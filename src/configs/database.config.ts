@@ -1,5 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
+import { User } from 'src/auth/entity/user';
 import { Ingredient, Recipe } from 'src/recipe/entity/recipe';
 
 dotenv.config();
@@ -24,7 +25,7 @@ export class ConfigDatabase {
       username: this.getValue('DATABASE_USER'),
       password: this.getValue('DATABASE_PASSWORD'),
       database: this.getValue('DATABASE_NAME'),
-      entities: [Recipe, Ingredient],
+      entities: [Recipe, Ingredient, User],
       synchronize: false,
       logging: true,
     };

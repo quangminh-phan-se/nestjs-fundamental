@@ -1,3 +1,4 @@
+import { User } from 'src/auth/entity/user';
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Unit } from '../dto/recipe.dto';
 
@@ -9,8 +10,14 @@ export class Recipe {
   @Column()
   description: string;
 
-  @OneToMany(() => Ingredient, (ingredient) => ingredient.recipe, { cascade: true, eager: true })
+  @OneToMany(() => Ingredient, (ingredient) => ingredient.recipe, {
+    cascade: true,
+    eager: true,
+  })
   ingredients: Ingredient[];
+
+  @ManyToOne(() => User, (user) => user.recipes)
+  user: User;
 }
 
 @Entity({ name: 'ingredient' })
@@ -27,6 +34,6 @@ export class Ingredient {
   @Column({ type: 'integer' })
   quantity: number;
 
-  @ManyToOne(() => Recipe, (recipe) => recipe.ingredients, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Recipe, (recipe) => recipe.ingredients)
   recipe: Recipe;
 }
